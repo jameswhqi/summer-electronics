@@ -1,0 +1,140 @@
+Added Component: Designator=Cboot(RAD-0.2)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "MuRata"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "GRM155R61A104KA01D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "GRM155R61A104KA01D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Added Component: Designator=Ccomp2(RAD-0.1)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Kemet"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "C0805C180K5GACTU"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "C0805C180K5GACTU"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "18pF"; VariantName = "[No Variations]"
+Added Component: Designator=Ccomp(RAD-0.2)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Yageo America"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "CC0805KRX7R9BB471"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "CC0805KRX7R9BB471"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "470pF"; VariantName = "[No Variations]"
+Added Component: Designator=Cin(CAPR5-4X5)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "MuRata"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "GRM188R61A225KE34D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "GRM188R61A225KE34D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "2.2uF"; VariantName = "[No Variations]"
+Added Component: Designator=Cout(CAPR5-4X5)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "TDK"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "C2012X5R1A476M125AC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "C2012X5R1A476M125AC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "47uF"; VariantName = "[No Variations]"
+Added Component: Designator=Css(RAD-0.1)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Yageo America"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "CC0805KRX7R9BB682"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "CC0805KRX7R9BB682"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "6.8nF"; VariantName = "[No Variations]"
+Added Component: Designator=D1(DIODE-0.7)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Diodes Inc."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "B340A-13-F"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "B340A-13-F"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "500mV"; VariantName = "[No Variations]"
+Added Component: Designator=L1(AXIAL-0.4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Bourns"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "SRN6045-3R3Y"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "SRN6045-3R3Y"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "3.3uH"; VariantName = "[No Variations]"
+Added Component: Designator=Rcomp(AXIAL-0.4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Yageo America"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "RC1206FR-0756KL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RC1206FR-0756KL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "56k"; VariantName = "[No Variations]"
+Added Component: Designator=RenB(AXIAL-0.4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Yageo America"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "RC1206FR-0730KL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RC1206FR-0730KL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "30k"; VariantName = "[No Variations]"
+Added Component: Designator=RenT(AXIAL-0.4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Panasonic"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "ERJ-8ENF1103V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "ERJ-8ENF1103V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "110k"; VariantName = "[No Variations]"
+Added Component: Designator=Rfbb(AXIAL-0.4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Yageo America"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "RC1206FR-078K2L"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RC1206FR-078K2L"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "8.2k"; VariantName = "[No Variations]"
+Added Component: Designator=Rfbt(AXIAL-0.4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Yageo America"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "RC1206FR-0743KL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "RC1206FR-0743KL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "43k"; VariantName = "[No Variations]"
+Added Component: Designator=Rt(AXIAL-0.4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Vishay-Dale"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "CRCW1206110KFKEA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "CRCW1206110KFKEA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "110k"; VariantName = "[No Variations]"
+Added Component: Designator=U1(N10A)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Manufacturer Name"; Value = "Texas Instruments"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "TPS54140DGQR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "TPS54160DGQR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "N/A"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=0 Pin=Ccomp2-2
+Added Pin To Net: NetName=0 Pin=Ccomp-2
+Added Pin To Net: NetName=0 Pin=Cin-2
+Added Pin To Net: NetName=0 Pin=Cout-2
+Added Pin To Net: NetName=0 Pin=Css-2
+Added Pin To Net: NetName=0 Pin=D1-2
+Added Pin To Net: NetName=0 Pin=RenB-2
+Added Pin To Net: NetName=0 Pin=Rfbb-2
+Added Pin To Net: NetName=0 Pin=Rt-2
+Added Pin To Net: NetName=0 Pin=U1-9
+Added Net: Name=0
+Added Pin To Net: NetName=NetCboot_1 Pin=Cboot-1
+Added Pin To Net: NetName=NetCboot_1 Pin=U1-1
+Added Net: Name=NetCboot_1
+Added Pin To Net: NetName=NetCboot_2 Pin=Cboot-2
+Added Pin To Net: NetName=NetCboot_2 Pin=D1-1
+Added Pin To Net: NetName=NetCboot_2 Pin=L1-2
+Added Pin To Net: NetName=NetCboot_2 Pin=U1-10
+Added Net: Name=NetCboot_2
+Added Pin To Net: NetName=NetCcomp2_1 Pin=Ccomp2-1
+Added Pin To Net: NetName=NetCcomp2_1 Pin=Rcomp-1
+Added Pin To Net: NetName=NetCcomp2_1 Pin=U1-8
+Added Net: Name=NetCcomp2_1
+Added Pin To Net: NetName=NetCcomp_1 Pin=Ccomp-1
+Added Pin To Net: NetName=NetCcomp_1 Pin=Rcomp-2
+Added Net: Name=NetCcomp_1
+Added Pin To Net: NetName=NetCin_1 Pin=Cin-1
+Added Pin To Net: NetName=NetCin_1 Pin=RenT-1
+Added Pin To Net: NetName=NetCin_1 Pin=U1-2
+Added Net: Name=NetCin_1
+Added Pin To Net: NetName=NetCout_1 Pin=Cout-1
+Added Pin To Net: NetName=NetCout_1 Pin=L1-1
+Added Pin To Net: NetName=NetCout_1 Pin=Rfbt-1
+Added Net: Name=NetCout_1
+Added Pin To Net: NetName=NetCss_1 Pin=Css-1
+Added Pin To Net: NetName=NetCss_1 Pin=U1-4
+Added Net: Name=NetCss_1
+Added Pin To Net: NetName=NetRenB_1 Pin=RenB-1
+Added Pin To Net: NetName=NetRenB_1 Pin=RenT-2
+Added Pin To Net: NetName=NetRenB_1 Pin=U1-3
+Added Net: Name=NetRenB_1
+Added Pin To Net: NetName=NetRfbb_1 Pin=Rfbb-1
+Added Pin To Net: NetName=NetRfbb_1 Pin=Rfbt-2
+Added Pin To Net: NetName=NetRfbb_1 Pin=U1-7
+Added Net: Name=NetRfbb_1
+Added Pin To Net: NetName=NetRt_1 Pin=Rt-1
+Added Pin To Net: NetName=NetRt_1 Pin=U1-5
+Added Net: Name=NetRt_1
+Added Class: Name=power_management
+Added Room: Name=power_management
