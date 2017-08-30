@@ -1,3 +1,2 @@
-**/.DS_Store
-**/*.bak
-**/debug.log
+.DS_Store
+*.bak
