@@ -1,6 +1,5 @@
 // Top module
-module Top
-(
+module Top (
     // global reset
     input rst,
     // crystal clock of 50MHz
@@ -24,6 +23,11 @@ module Top
     // buzzer
     output buzz
 );
+    
+    // 1us, 1ms
+    wire clkus, clkms;
+    Clkdiv #(6, 50) clk1 (.clk(clk), .nclk(clkus));
+    Clkdiv #(10, 1000) clk2 (.clk(clkus), .nclk(clkms));
 
     Core core (.rst(rst), .clk(clk), .hall(hall), .object_color(object_color), .station_color(station_color),
                .end_of_track(end_of_track), .uturn_finished(uturn_finished), .buzz_finished(buzz_finished),

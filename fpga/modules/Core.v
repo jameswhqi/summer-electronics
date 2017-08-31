@@ -1,4 +1,4 @@
-// Core module
+// core logic
 module Core (
     // global reset
     input rst,
@@ -6,27 +6,26 @@ module Core (
     input clk,
     // binary signal from hall sensor
     input hall,
-    // encoded color type from Color module
+    // encoded color type from Color
     input [1:0] object_color,
     input [1:0] station_color,
-    // feedback from Tracking module
+    // feedbacks from Trackuturn
     // end of track
     input end_of_track,
-    // feedback from Uturn module
     // u-turn finished
     input uturn_finished,
-    // feedback from Buzzer module
+    // feedback from Buzzer
     // error buzzing finished
     input buzz_finished,
-    // enable Tracking module
+    // enable tracking in Trackuturn
     output reg en_tracking,
-    // enable Uturn module
+    // enable uturn in Trackuturn
     output reg en_uturn,
-    // status code to ssd control
+    // status code to Ssd
     // 0 ready          1/2/3 sending red/green/blue    4/5/6 red/green/blue arrived
     // 7 end of track   8 u-turning                     9 returning
     output reg [3:0] ssd_code,
-    // enable Buzzer module
+    // enable Buzzer
     output reg en_buzz
 );
 
