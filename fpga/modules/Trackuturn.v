@@ -22,15 +22,15 @@ module Trackuturn (
 );
 
     // fsm states
-    parameter   STOP        = 5'b00001,
-                TRACK       = 5'b00010, // tracking
-                INITIAL     = , // initial backward movement of a u-turn process
-                FORWARD     = 5'b00100, // going forward during u-turn
-                BACKWARD    = 5'b01000, // going backward during u-turn
-                FINAL       = 5'b10000; // final straight driving in case of ending after BACKWARD
+    parameter   STOP        = 6'b000001,
+                TRACK       = 6'b000010, // tracking
+                INITIAL     = 6'b000100, // initial backward movement of a u-turn process
+                FORWARD     = 6'b001000, // going forward during u-turn
+                BACKWARD    = 6'b010000, // going backward during u-turn
+                FINAL       = 6'b100000; // final straight driving in case of ending after BACKWARD
 
     // current state, next state
-    reg [4:0] cstate, nstate;
+    reg [5:0] cstate, nstate;
 
     // indicate whether ir[2] has touched black after touching white
     reg [1:0] initial_touch;
@@ -38,8 +38,8 @@ module Trackuturn (
     // indicates that ir[2:1] has crossed the black-white border
     reg crossed;
 
-    // indicates that u-turn process has entered the second half
-    reg switched;
+    // indicates that ir[0] has touched black
+    reg right_black;
 
     // interpretation of signal from infrared sensors
     parameter WHITE = 1'b0, BLACK = 1'b1;
@@ -98,7 +98,7 @@ module Trackuturn (
             FORWARD:
                 if (ir[2] == BLACK && ir[1] == BLACK)
                     nstate = BACKWARD;
-                else if (crossed && ir[2] == WHITE && ir[1] == WHITE || switched && ir[3] == BLACK)
+                else if (crossed && ir[2:1] == {WHITE, WHITE} || right_black && ir[2:0] == {WHITE, WHITE, WHITE})
                     nstate = STOP;
                 else
                     nstate = FORWARD;
@@ -118,7 +118,8 @@ module Trackuturn (
                 nstate = STOP;
         endcase
 
-    // front_wheel, motor, end_of_track, uturn_finished, initial_touch, crossed, switched, delay, delayed
+    // front_wheel, motor, end_of_track, uturn_finished, initial_touch,
+    // crossed, right_black, delay, delayed
     always @(posedge clk or negedge rst)
         if (!rst) begin
             front_wheel <= STRAIGHT;
@@ -127,7 +128,7 @@ module Trackuturn (
             uturn_finished <= 0;
             initial_touch <= 0;
             crossed <= 0;
-            switched <= 0;
+            right_black <= 0;
             delay <= 0;
             delayed <= 0;
         end
@@ -143,7 +144,7 @@ module Trackuturn (
                         uturn_finished <= 0;
                     initial_touch <= 0;
                     crossed <= 0;
-                    switched <= 0;
+                    right_black <= 0;
                     delay <= 0;
                     delayed <= 0;
                 end
@@ -182,13 +183,16 @@ module Trackuturn (
                         front_wheel <= LEFT_BIG;
                     if (delay >= DRIVE_DELAY)
                         motor <= MOTOR_FOR;
-                    if (cstate == BACKWARD)
+                    else if (!delayed)
+                        motor <= MOTOR_STOP;
+                    if (cstate == BACKWARD) begin
                         crossed <= 0;
+                        right_black <= 0;
+                    end
                     if (ir[2:1] == {WHITE, BLACK})
-                        if (switched)
-                            crossed <= 1;
-                        else
-                            switched <= 1;
+                        crossed <= 1;
+                    if (ir[0] == BLACK)
+                        right_black <= 1;
                     if (delayed)
                         delay <= 0;
                     else
@@ -203,13 +207,12 @@ module Trackuturn (
                         front_wheel <= RIGHT_BIG;
                     if (delay >= DRIVE_DELAY)
                         motor <= MOTOR_BACK;
+                    else if (!delayed)
+                        motor <= MOTOR_STOP;
                     if (cstate == FORWARD)
                         crossed <= 0;
                     if (ir[2:1] == {WHITE, BLACK})
-                        if (switched)
-                            crossed <= 1;
-                        else
-                            switched <= 1;
+                        crossed <= 1;
                     if (delayed)
                         delay <= 0;
                     else
@@ -220,13 +223,15 @@ module Trackuturn (
                         delayed <= 1;
                 end
                 FINAL: begin
-                    if (delay >= TURN_DELAY)
+                    if (delay >= TURN_DELAY || delayed)
                         if (ir[1] == BLACK)
                             front_wheel <= RIGHT_SMALL;
                         else if (ir[0] == BLACK)
                             front_wheel <= STRAIGHT;
                     if (delay >= DRIVE_DELAY)
                         motor <= MOTOR_FOR;
+                    else if (!delayed)
+                        motor <= MOTOR_STOP;
                     if (delayed)
                         delay <= 0;
                     else
