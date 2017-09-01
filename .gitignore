@@ -1,2 +1,12 @@
 .DS_Store
 *.bak
+**/__Previews/**
+**/History/**
+debug.log
+**/Project Logs*/**
+**/simulation/**
+**/output_files/**
+**/incremental_db/**
+**/db/**
+*.qws
+*.rpt
