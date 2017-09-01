@@ -199,3 +199,8 @@
 [0901/082520:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
 [0901/082525:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
 [0901/082525:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0901/155309:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0901/155643:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0901/160442:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0901/160909:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0901/172118:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.

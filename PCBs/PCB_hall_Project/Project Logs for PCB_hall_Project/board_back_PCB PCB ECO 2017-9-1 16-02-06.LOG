@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=NetPortH_2 Pin=PortOut-5
+Removed Pin From Net: NetName=VCC Pin=PortOut-6
+Added Pin To Net: NetName=NetPortH_2 Pin=PortOut-2
+Added Pin To Net: NetName=VCC Pin=PortOut-3
+Added Pin To Net: NetName=NetPortOut_5 Pin=PortOut-5
+Added Pin To Net: NetName=NetPortOut_5 Pin=PortVcc-2
+Added Net: Name=NetPortOut_5
+Added Pin To Net: NetName=NetPortOut_6 Pin=PortOut-6
+Added Pin To Net: NetName=NetPortOut_6 Pin=PortVcc-1
+Added Net: Name=NetPortOut_6
