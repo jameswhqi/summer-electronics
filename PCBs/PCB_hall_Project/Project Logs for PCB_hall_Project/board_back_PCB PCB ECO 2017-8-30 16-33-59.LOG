@@ -1,0 +1,40 @@
+Added Component: Designator=PortGND(HDR1X4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=PortH(HDR1X3)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=PortOut(HDR1X4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=PortVcc(HDR1X4)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=PortGND-1
+Added Pin To Net: NetName=GND Pin=PortH-1
+Added Net: Name=GND
+Added Pin To Net: NetName=NetPortH_2 Pin=PortH-2
+Added Pin To Net: NetName=NetPortH_2 Pin=PortOut-1
+Added Net: Name=NetPortH_2
+Added Pin To Net: NetName=NetPortOut_2 Pin=PortOut-2
+Added Pin To Net: NetName=NetPortOut_2 Pin=PortVcc-2
+Added Net: Name=NetPortOut_2
+Added Pin To Net: NetName=NetPortOut_3 Pin=PortOut-3
+Added Pin To Net: NetName=NetPortOut_3 Pin=PortVcc-1
+Added Net: Name=NetPortOut_3
+Added Pin To Net: NetName=NetPortOut_4 Pin=PortOut-4
+Added Pin To Net: NetName=NetPortOut_4 Pin=PortVcc-3
+Added Net: Name=NetPortOut_4
+Added Pin To Net: NetName=VCC Pin=PortH-3
+Added Pin To Net: NetName=VCC Pin=PortVcc-4
+Added Net: Name=VCC
+Added Class: Name=board_back
+Added Room: Name=board_back

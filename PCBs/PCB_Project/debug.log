@@ -1,2 +1,24 @@
 [0830/095820:ERROR:ipc_channel_win.cc(217)] pipe error: 109
 [0830/100404:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0830/124241:INFO:CONSOLE(1)] "The value "device-width;" for key "width" is invalid, and has been ignored.", source: https://net.tsinghua.edu.cn/wireless/?url=http://www.altium.com (1)
+[0830/124241:INFO:CONSOLE(1)] "The value "1.0;" for key "initial-scale" was truncated to its numeric prefix.", source: https://net.tsinghua.edu.cn/wireless/?url=http://www.altium.com (1)
+[0830/124241:INFO:CONSOLE(1)] "The value "1.0;" for key "maximum-scale" was truncated to its numeric prefix.", source: https://net.tsinghua.edu.cn/wireless/?url=http://www.altium.com (1)
+[0830/124241:INFO:CONSOLE(1)] "Error parsing a meta element's content: ';' is not a valid key-value pair separator. Please use ',' instead.", source: https://net.tsinghua.edu.cn/wireless/?url=http://www.altium.com (1)
+[0830/124241:ERROR:ssl_client_socket_openssl.cc(1132)] handshake failed; returned -1, SSL error code 1, net_error -101
+[0830/124241:ERROR:ssl_client_socket_openssl.cc(1132)] handshake failed; returned -1, SSL error code 1, net_error -101
+[0830/124241:ERROR:ssl_client_socket_openssl.cc(1132)] handshake failed; returned -1, SSL error code 1, net_error -101
+[0830/124241:INFO:CONSOLE(0)] "Synchronous XMLHttpRequest on the main thread is deprecated because of its detrimental effects to the end user's experience. For more help, check https://xhr.spec.whatwg.org/.", source:  (0)
+[0830/124241:ERROR:ssl_client_socket_openssl.cc(1132)] handshake failed; returned -1, SSL error code 1, net_error -101
+[0830/124241:ERROR:ssl_client_socket_openssl.cc(1132)] handshake failed; returned -1, SSL error code 1, net_error -101
+[0830/124241:ERROR:ssl_client_socket_openssl.cc(1132)] handshake failed; returned -1, SSL error code 1, net_error -101
+[0830/124241:ERROR:ssl_client_socket_openssl.cc(1132)] handshake failed; returned -1, SSL error code 1, net_error -101
+[0830/141031:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0830/141031:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0830/141036:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0830/141036:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0830/141046:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0830/141051:WARNING:dns_config_service_win.cc(665)] Failed to read DnsConfig.
+[0830/144420:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0830/144605:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0830/145103:ERROR:ipc_channel_win.cc(217)] pipe error: 109
+[0830/163726:ERROR:ipc_channel_win.cc(482)] pipe error: 109
