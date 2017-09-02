@@ -9,14 +9,17 @@ module Top (
     // binary signal of hall sensor
     input hall,
     // square wave from color sensors
-    input object_color
-    input station_color
+    input object_color,
+    input station_color,
+    // color selection to color sensor modules
+    output [1:0] object_select,
+    output [1:0] station_select,
     // PWM signal to servomotor
-    output servo
+    output servo,
     // IN pin of the 2 motor driver chips
-    output [1:0] motor_ctrl
+    output [1:0] motor_ctrl,
     // INH pin of the 2 motor driver chips
-    output [1:0] motor_en
+    output [1:0] motor_en,
     // seven-segment displays
     output [3:0] bit,
     output [6:0] seg,
