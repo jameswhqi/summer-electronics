@@ -1,4 +1,5 @@
-module clkdiv
+// clock division
+module Clkdiv
 (
     input clk,
     //new clock

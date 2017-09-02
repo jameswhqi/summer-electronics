@@ -38,7 +38,7 @@
 
 set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name DEVICE EP2C5Q208C8
-set_global_assignment -name TOP_LEVEL_ENTITY Trackuturn
+set_global_assignment -name TOP_LEVEL_ENTITY Color
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 13.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:34:03  AUGUST 30, 2017"
 set_global_assignment -name LAST_QUARTUS_VERSION 13.0
@@ -49,19 +49,40 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name EDA_TIME_SCALE "1 us" -section_id eda_simulation
-set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY ON -section_id eda_simulation
+set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY OFF -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
 set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH Trackuturn_tb -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME Core_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Core_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Core_tb -section_id Core_tb
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST ON -section_id eda_simulation
-set_global_assignment -name VERILOG_FILE ../modules/Trackuturn.v
 set_global_assignment -name EDA_TEST_BENCH_FILE modules/Core_tb.v -section_id Core_tb
 set_global_assignment -name EDA_TEST_BENCH_NAME Trackuturn_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Trackuturn_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Trackuturn_tb -section_id Trackuturn_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE ../modules/Trackuturn_tb.v -section_id Trackuturn_tb
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_location_assignment PIN_132 -to clk
+set_location_assignment PIN_63 -to object_color[1]
+set_location_assignment PIN_64 -to object_color[0]
+set_location_assignment PIN_94 -to object_select[1]
+set_location_assignment PIN_92 -to object_select[0]
+set_location_assignment PIN_95 -to object_wave
+set_location_assignment PIN_69 -to station_color[1]
+set_location_assignment PIN_70 -to station_color[0]
+set_location_assignment PIN_72 -to station_select[1]
+set_location_assignment PIN_74 -to station_select[0]
+set_location_assignment PIN_75 -to station_wave
+set_global_assignment -name VERILOG_FILE ../modules/Pintest.v
+set_global_assignment -name VERILOG_FILE ../modules/Top.v
+set_global_assignment -name VERILOG_FILE ../modules/Clkdiv.v
+set_global_assignment -name VERILOG_FILE ../modules/Color.v
+set_location_assignment PIN_56 -to cnt_out[7]
+set_location_assignment PIN_57 -to cnt_out[6]
+set_location_assignment PIN_58 -to cnt_out[5]
+set_location_assignment PIN_59 -to cnt_out[4]
+set_location_assignment PIN_60 -to cnt_out[3]
+set_location_assignment PIN_61 -to cnt_out[2]
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
