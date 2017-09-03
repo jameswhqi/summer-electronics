@@ -21,7 +21,7 @@ module Core (
     output reg en_tracking,
     // enable uturn in Trackuturn
     output reg en_uturn,
-    // status code to Ssd
+    // display state code to Ssd
     // 0 ready          1/2/3 sending red/green/blue    4/5/6 red/green/blue arrived
     // 7 end of track   8 u-turning                     9 returning
     output reg [3:0] ssd_code,
