@@ -5,9 +5,9 @@ module Motor (
     // motor speed from Trackuturn
     input [1:0] speed,
     // IN pin of the 2 motor driver chips
-    output [1:0] motor_ctrl,
+    output reg [1:0] motor_ctrl,
     // INH pin of the 2 motor driver chips
-    output [1:0] motor_en
+    output reg [1:0] motor_en
 );
     
     // motor speed
@@ -20,8 +20,8 @@ module Motor (
     parameter   PERIOD  = 2273; // 440Hz
 
     // pulse width of different speed
-    parameter   NORMAL  = 200,
-                FAST    = 400;
+    parameter   NORMAL  = 100,
+                FAST    = 100;
 
     // counter
     reg [11:0] cnt;

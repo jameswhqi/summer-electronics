@@ -16,11 +16,11 @@ module Servo (
                 RIGHT_BIG   = 3'b111;
 
     // pulse width of each direction
-    parameter   W_STRAIGHT      = 1500, // 0 deg
-                W_LEFT_SMALL    = 1200, // -27 deg
-                W_LEFT_BIG      = 900, // -54 deg
-                W_RIGHT_SMALL   = 1800, // 27 deg
-                W_RIGHT_BIG     = 2100; // 54 deg
+    parameter   W_STRAIGHT      = 1450, // 0 deg
+                W_LEFT_SMALL    = 1750, // -27 deg
+                W_LEFT_BIG      = 1950, // -45 deg
+                W_RIGHT_SMALL   = 1150, // 27 deg
+                W_RIGHT_BIG     = 950; // 54 deg
 
     // 5ms period counter
     reg [12:0] cnt;

@@ -24,7 +24,7 @@ module Core (
     // display state code to Ssd
     // 0 ready          1/2/3 sending red/green/blue    4/5/6 red/green/blue arrived
     // 7 end of track   8 u-turning                     9 returning
-    output reg [3:0] ssd_code,
+    output reg [3:0] ssd_state,
     // enable Buzzer
     output reg en_buzz
 );
@@ -56,7 +56,7 @@ module Core (
     always @(*)
         case (cstate)
             READY:
-                if (hall)
+                if (!hall)
                     if (object_color == 0)
                         nstate = NOCOLOR;
                     else
@@ -76,7 +76,7 @@ module Core (
                 else
                     nstate = SEND;
             MATCH:
-                if (hall)
+                if (!hall)
                     nstate = UTURN;
                 else
                     nstate = MATCH;
@@ -102,12 +102,12 @@ module Core (
                 nstate = READY;
         endcase
 
-    // en_tracking, en_uturn, ssd_code, en_buzz, object_color_detected, returning
+    // en_tracking, en_uturn, ssd_state, en_buzz, object_color_detected, returning
     always @(posedge clk or negedge rst)
         if (!rst) begin
             en_tracking <= 0;
             en_uturn <= 0;
-            ssd_code <= 0;
+            ssd_state <= 0;
             en_buzz <= 0;
             object_color_detected <= 0;
             returning <= 0;
@@ -116,7 +116,7 @@ module Core (
             case (nstate)
                 READY: begin
                     en_uturn <= 0;
-                    ssd_code <= 0;
+                    ssd_state <= 0;
                     en_buzz <= 0;
                     returning <= 0;
                 end
@@ -125,35 +125,37 @@ module Core (
                 SEND: begin
                     en_tracking <= 1;
                     case (object_color_detected)
-                        1: ssd_code <= 1;
-                        2: ssd_code <= 2;
-                        3: ssd_code <= 3;
+                        1: ssd_state <= 1;
+                        2: ssd_state <= 2;
+                        3: ssd_state <= 3;
                     endcase
-                    object_color_detected <= object_color;
+                    if (cstate == READY)
+                        object_color_detected <= object_color;
                 end
                 MATCH: begin
                     case (object_color_detected)
-                        1: ssd_code <= 4;
-                        2: ssd_code <= 5;
-                        3: ssd_code <= 6;
+                        1: ssd_state <= 4;
+                        2: ssd_state <= 5;
+                        3: ssd_state <= 6;
                     endcase
                     en_tracking <= 0;
                     en_buzz <= 1;
                 end
                 UTURN: begin
-                    ssd_code <= 8;
+                    en_tracking <= 0;
+                    ssd_state <= 8;
                     en_uturn <= 1;
                     en_buzz <= 0;
                 end
                 RETURN: begin
                     en_tracking <= 1;
                     en_uturn <= 0;
-                    ssd_code <= 9;
+                    ssd_state <= 9;
                     object_color_detected <= 0;
                     returning <= 1;
                 end
                 EOT: begin
-                    ssd_code <= 7;
+                    ssd_state <= 7;
                     en_tracking <= 0;
                     en_buzz <= 1;
                 end

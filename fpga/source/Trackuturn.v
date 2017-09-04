@@ -18,7 +18,10 @@ module Trackuturn (
     // end of track to Core
     output reg end_of_track,
     // u-turn finished to Core
-    output reg uturn_finished
+    output reg uturn_finished,
+
+    output reg [5:0] cstate,
+    output reg crossed
 );
 
     // fsm states
@@ -30,13 +33,13 @@ module Trackuturn (
                 FINAL       = 6'b100000; // final straight driving in case of ending after BACKWARD
 
     // current state, next state
-    reg [5:0] cstate, nstate;
+    reg [5:0] nstate;
 
     // indicate whether ir[2] has touched black after touching white
     reg [1:0] initial_touch;
 
     // indicates that ir[2:1] has crossed the black-white border
-    reg crossed;
+    // reg crossed;
 
     // indicates that ir[0] has touched black
     reg right_black;
@@ -58,14 +61,14 @@ module Trackuturn (
                 FAST_FORWARD= 2'b11;
 
     // delay before turning front wheels and before driving motor
-    // parameter   TURN_DELAY  = 25000000, // 0.5s
-    //             DRIVE_DELAY = 40000000; // + 0.3s
+    parameter   TURN_DELAY  = 25000000, // 0.5s
+                DRIVE_DELAY = 40000000; // + 0.3s
     
-    // reg [25:0] delay;
+    reg [25:0] delay;
     // for testing
-    parameter   TURN_DELAY  = 5,
-                DRIVE_DELAY = 8;
-    reg [3:0] delay;
+    // parameter   TURN_DELAY  = 5,
+    //             DRIVE_DELAY = 8;
+    // reg [3:0] delay;
     reg delayed;
 
     // change state
@@ -91,7 +94,7 @@ module Trackuturn (
                 else
                     nstate = TRACK;
             INITIAL:
-                if (initial_touch == 2 && ir[2] == WHITE)
+                if (initial_touch == 2)
                     nstate = FORWARD;
                 else
                     nstate = INITIAL;
@@ -169,6 +172,7 @@ module Trackuturn (
                         motor <= MOTOR_FOR;
                     if (ir == {BLACK, BLACK, BLACK, BLACK})
                         end_of_track <= 1;
+                    uturn_finished <= 0;
                 end
                 INITIAL: begin
                     front_wheel <= RIGHT_BIG;

@@ -40,9 +40,12 @@ module Ssd (
 
     // segs, state_intl, start_addr, num_ministates, ministate, phase, minicnt
     always @(posedge clkus) begin
-        if (state != state_intl) begin
+        if (state != state_intl || num_ministates == 0 || state >= 10) begin
             state_intl <= state;
-            start_addr <= rom[state];
+            if (state < 10)
+                start_addr <= rom[state];
+            else
+                start_addr <= rom[0];
             phase <= 1;
         end
         if (phase == 1) begin
@@ -56,7 +59,10 @@ module Ssd (
                 ministate <= 0;
             else
                 ministate <= ministate + 1;
-            segs <= rom[start_addr + (ministate << 2) + 1:start_addr + (ministate << 2) + 4];
+            segs[3] <= rom[start_addr + (ministate << 2) + 1];
+            segs[2] <= rom[start_addr + (ministate << 2) + 2];
+            segs[1] <= rom[start_addr + (ministate << 2) + 3];
+            segs[0] <= rom[start_addr + (ministate << 2) + 4];
         end
         if (minicnt == PERIOD - 1)
             minicnt <= 0;
