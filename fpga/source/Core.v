@@ -33,7 +33,9 @@ module Core (
     // enable Buzzer
     output reg en_buzz,
 
-    output reg object_led, station_led
+    output reg en_object, en_station
+
+    //output reg [7:0] cstate
 );
 
     // fsm states
@@ -115,7 +117,7 @@ module Core (
                 nstate = READY;
         endcase
 
-    // en_tracking, en_uturn, en_brake, en_reverse, ssd_state, en_buzz, object_led, station_led,
+    // en_tracking, en_uturn, en_brake, en_reverse, ssd_state, en_buzz, en_object, en_station,
     // object_color_detected, returning
     always @(posedge clk or negedge rst)
         if (!rst) begin
@@ -125,8 +127,8 @@ module Core (
             en_reverse <= 0;
             ssd_state <= 0;
             en_buzz <= 0;
-            object_led <= 1;
-            station_led <= 0;
+            en_object <= 1;
+            en_station <= 0;
             object_color_detected <= 0;
             returning <= 0;
         end
@@ -138,8 +140,8 @@ module Core (
                     en_reverse <= 0;
                     ssd_state <= 0;
                     en_buzz <= 0;
-                    object_led <= 1;
-                    station_led <= 0;
+                    en_object <= 1;
+                    en_station <= 0;
                     returning <= 0;
                 end
                 NOCOLOR:
@@ -151,8 +153,8 @@ module Core (
                         2: ssd_state <= 2;
                         3: ssd_state <= 3;
                     endcase
-                    object_led <= 0;
-                    station_led <= 1;
+                    en_object <= 0;
+                    en_station <= 1;
                     if (cstate == READY)
                         object_color_detected <= object_color;
                 end
@@ -165,7 +167,7 @@ module Core (
                     en_tracking <= 0;
                     en_brake <= 1;
                     en_buzz <= 1;
-                    station_led <= 0;
+                    en_station <= 0;
                 end
                 UTURN: begin
                     en_tracking <= 0;
@@ -185,7 +187,7 @@ module Core (
                     en_tracking <= 0;
                     en_brake <= 1;
                     en_buzz <= 1;
-                    station_led <= 0;
+                    en_station <= 0;
                 end
                 REVERSE: begin
                     en_reverse <= 1;

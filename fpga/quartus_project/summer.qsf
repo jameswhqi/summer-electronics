@@ -63,9 +63,9 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME Trackuturn_tb -section_id
 set_global_assignment -name EDA_TEST_BENCH_FILE ../modules/Trackuturn_tb.v -section_id Trackuturn_tb
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_location_assignment PIN_132 -to clk
-set_location_assignment PIN_135 -to object_select[1]
-set_location_assignment PIN_138 -to object_select[0]
-set_location_assignment PIN_133 -to object_wave
+set_location_assignment PIN_72 -to object_select[1]
+set_location_assignment PIN_75 -to object_select[0]
+set_location_assignment PIN_69 -to object_wave
 set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS OFF
 set_global_assignment -name ALLOW_ANY_ROM_SIZE_FOR_RECOGNITION ON
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
@@ -88,16 +88,10 @@ set_location_assignment PIN_37 -to bit[2]
 set_location_assignment PIN_36 -to bit[1]
 set_location_assignment PIN_35 -to bit[0]
 set_location_assignment PIN_152 -to buzz
-set_location_assignment PIN_58 -to cstate[5]
-set_location_assignment PIN_59 -to cstate[4]
-set_location_assignment PIN_60 -to cstate[3]
-set_location_assignment PIN_61 -to cstate[2]
-set_location_assignment PIN_63 -to cstate[1]
-set_location_assignment PIN_64 -to cstate[0]
-set_location_assignment PIN_151 -to hall
-set_location_assignment PIN_90 -to ir_in[3]
-set_location_assignment PIN_89 -to ir_in[2]
-set_location_assignment PIN_181 -to ir_in[1]
+set_location_assignment PIN_141 -to hall
+set_location_assignment PIN_181 -to ir_in[3]
+set_location_assignment PIN_90 -to ir_in[2]
+set_location_assignment PIN_89 -to ir_in[1]
 set_location_assignment PIN_180 -to ir_in[0]
 set_location_assignment PIN_164 -to motor_ctrl[1]
 set_location_assignment PIN_163 -to motor_ctrl[0]
@@ -112,8 +106,9 @@ set_location_assignment PIN_48 -to seg[2]
 set_location_assignment PIN_41 -to seg[1]
 set_location_assignment PIN_43 -to seg[0]
 set_location_assignment PIN_106 -to servo_pwm
-set_location_assignment PIN_72 -to station_select[1]
-set_location_assignment PIN_75 -to station_select[0]
-set_location_assignment PIN_69 -to station_wave
-set_location_assignment PIN_57 -to crossed
+set_location_assignment PIN_145 -to station_select[1]
+set_location_assignment PIN_147 -to station_select[0]
+set_location_assignment PIN_143 -to station_wave
+set_location_assignment PIN_150 -to station_led
+set_location_assignment PIN_77 -to object_led
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

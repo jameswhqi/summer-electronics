@@ -10,9 +10,10 @@ module Color (
     output reg [1:0] station_select,
     // encoded color type to Core
     output reg [1:0] object_color,
-    output reg [1:0] station_color
+    output reg [1:0] station_color,
 
-    // input [1:0] out_select,
+    input en_object, en_station,
+    output reg object_led, station_led
     // output reg [7:0] cnt_out
 );
 
@@ -49,17 +50,35 @@ module Color (
             cnt <= cnt + 1;
         case (mode)
             CNT_R: begin
-                object_select <= SELECT_R;
-                station_select <= SELECT_R;
+                if (en_object && object_led)
+                    object_select <= SELECT_R;
+                else
+                    object_select <= 2'b11;
+                if (en_station && station_led)
+                    station_select <= SELECT_R;
+                else
+                    station_select <= 2'b11;
                 calc_done <= 0;
             end
             CNT_G: begin
-                object_select <= SELECT_G;
-                station_select <= SELECT_G;
+                if (en_object && object_led)
+                    object_select <= SELECT_G;
+                else
+                    object_select <= 2'b11;
+                if (en_station && station_led)
+                    station_select <= SELECT_G;
+                else
+                    station_select <= 2'b11;
             end
             CNT_B: begin
-                object_select <= SELECT_B;
-                station_select <= SELECT_B;
+                if (en_object && object_led)
+                    object_select <= SELECT_B;
+                else
+                    object_select <= 2'b11;
+                if (en_station && station_led)
+                    station_select <= SELECT_B;
+                else
+                    station_select <= 2'b11;
             end
             CALC:
                 if (!calc_done) begin
@@ -77,7 +96,7 @@ module Color (
                     if (stn_cnt_r >= 20 && stn_cnt_r < 40 && stn_cnt_r > stn_cnt_b && stn_cnt_r - stn_cnt_r[9:2] - stn_cnt_r[9:3] > stn_cnt_g && stn_cnt_b > stn_cnt_g
                         || stn_cnt_r >= 40 && stn_cnt_r - stn_cnt_r[9:2] > stn_cnt_b && stn_cnt_r - stn_cnt_r[9:1] > stn_cnt_g && stn_cnt_b > stn_cnt_g)
                         station_color <= 1;
-                    else if (stn_cnt_g >= 16 && stn_cnt_g > stn_cnt_r && stn_cnt_g > stn_cnt_b)
+                    else if (stn_cnt_g >= 16 && stn_cnt_g - stn_cnt_g[9:2] > stn_cnt_r && stn_cnt_g - stn_cnt_g[9:2] > stn_cnt_b)
                         station_color <= 2;
                     else if (stn_cnt_b >= 24 && stn_cnt_b < 48 && stn_cnt_b - stn_cnt_b[9:2] > stn_cnt_r && stn_cnt_b - stn_cnt_b[9:2] > stn_cnt_g
                              || stn_cnt_b >= 48 && stn_cnt_b - stn_cnt_b[9:2] - stn_cnt_b[9:3] > stn_cnt_r && stn_cnt_b - stn_cnt_b[9:2] - stn_cnt_b[9:3] > stn_cnt_g)
@@ -96,6 +115,14 @@ module Color (
                     calc_done <= 1;
                 end
         endcase
+        if (!en_object && object_select == 2'b11)
+            object_led <= 0;
+        else
+            object_led <= 1;
+        if (!en_station && station_select == 2'b11)
+            station_led <= 0;
+        else
+            station_led <= 1;
     end
 
     always @(posedge object_wave)
