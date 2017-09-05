@@ -64,7 +64,7 @@ module Core (
     always @(*)
         case (cstate)
             READY:
-                if (color_cnt == 1)
+                if (!hall)
                     if (object_color == 0)
                         nstate = NOCOLOR;
                     else

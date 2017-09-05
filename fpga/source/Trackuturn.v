@@ -119,7 +119,7 @@ module Trackuturn (
 
     // front_wheel, motor, end_of_track, uturn_finished, brake_finished, reverse_finished,
     // brake_cnt, delay, delayed, double_white
-    always @(posedge clk or negedge rst)
+    always @(posedge clkus or negedge rst)
         if (!rst) begin
             front_wheel <= STRAIGHT;
             motor <= MOTOR_STOP;
