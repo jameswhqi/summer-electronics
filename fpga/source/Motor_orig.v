@@ -14,14 +14,14 @@ module Motor (
     parameter   MOTOR_STOP  = 2'b00,
                 MOTOR_FOR   = 2'b01,
                 MOTOR_BACK  = 2'b10,
-                MOTOR_BRAKE = 2'b11;
+                FAST_FORWARD= 2'b11;
 
     // period
     parameter   PERIOD  = 2273; // 440Hz
 
     // pulse width of different speed
     parameter   NORMAL  = 100,
-                BRAKE   = 50;
+                FAST    = 100;
 
     // counter
     reg [11:0] cnt;
@@ -59,13 +59,13 @@ module Motor (
                 if (cnt == NORMAL)
                     switched <= 1;
             end
-            MOTOR_BRAKE: begin
-                if (cnt < BRAKE && !switched)
-                    motor_ctrl <= 2'b01;
+            FAST_FORWARD: begin
+                if (cnt < FAST && !switched)
+                    motor_ctrl <= 2'b10;
                 else
                     motor_ctrl <= 2'b00;
                 motor_en <= 2'b11;
-                if (cnt == BRAKE)
+                if (cnt == FAST)
                     switched <= 1;
             end
         endcase

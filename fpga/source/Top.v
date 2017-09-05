@@ -31,8 +31,7 @@ module Top (
     // input [3:0] state
     // output uturn_finished,
 
-    output [5:0] cstate,
-    output crossed
+    output object_led, station_led
 );
 
     // 1us, 1ms
@@ -41,11 +40,12 @@ module Top (
     Clkdiv #(10, 1000) clk2 (.clk(clkus), .nclk(clkms));
 
     wire [1:0] object_color, station_color;
-    wire end_of_track, buzz_finished, en_tracking, en_uturn, en_buzz;
+    wire end_of_track, uturn_finished, brake_finished, reverse_finished, buzz_finished, en_tracking, en_uturn, en_brake, en_reverse, en_buzz;
     wire [3:0] ssd_state;
     Core core (.rst(rst), .clk(clk), .hall(hall), .object_color(object_color), .station_color(station_color),
-               .end_of_track(end_of_track), .uturn_finished(uturn_finished), .buzz_finished(buzz_finished),
-               .en_tracking(en_tracking), .en_uturn(en_uturn), .ssd_state(ssd_state), .en_buzz(en_buzz));
+               .end_of_track(end_of_track), .uturn_finished(uturn_finished), .brake_finished(brake_finished), .reverse_finished(reverse_finished),
+               .buzz_finished(buzz_finished), .en_tracking(en_tracking), .en_uturn(en_uturn), .en_brake(en_brake), .en_reverse(en_reverse),
+               .ssd_state(ssd_state), .en_buzz(en_buzz), .object_led(object_led), .station_led(station_led));
 
     Color color (.clkus(clkus), .object_wave(object_wave), .station_wave(station_wave),
                  .object_select(object_select), .station_select(station_select), .object_color(object_color), .station_color(station_color));
@@ -55,17 +55,16 @@ module Top (
 
     Buzzer buzzer (.clkms(clkms), .enable(en_buzz), .finished(buzz_finished), .buzz(buzz));
 
-    wire [2:0] front_wheel;
-    wire [1:0] motor_speed;
+    wire [1:0] front_wheel, motor_speed;
     wire [3:0] ir;
     Deosc deosc3 (.clkus(clkus), .in(ir_in[3]), .out(ir[3]));
     Deosc deosc2 (.clkus(clkus), .in(ir_in[2]), .out(ir[2]));
     Deosc deosc1 (.clkus(clkus), .in(ir_in[1]), .out(ir[1]));
     Deosc deosc0 (.clkus(clkus), .in(ir_in[0]), .out(ir[0]));
 
-    Trackuturn trackuturn (.rst(rst), .clk(clk), .ir(ir), .en_tracking(en_tracking), .en_uturn(en_uturn),
+    Trackuturn trackuturn (.rst(rst), .clkus(clkus), .ir(ir), .en_tracking(en_tracking), .en_uturn(en_uturn), .en_brake(en_brake), .en_reverse(en_reverse),
                            .front_wheel(front_wheel), .motor(motor_speed), .end_of_track(end_of_track), .uturn_finished(uturn_finished),
-                           .cstate(cstate), .crossed(crossed));
+                           .brake_finished(brake_finished), .reverse_finished(reverse_finished));
 
     Servo servo (.clkus(clkus), .direction(front_wheel), .pwm(servo_pwm));
 

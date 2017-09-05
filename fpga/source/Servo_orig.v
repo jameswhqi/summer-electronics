@@ -9,14 +9,18 @@ module Servo (
 );
     
     // front wheel direction
-    parameter   STRAIGHT    = 2'b00,
-                LEFT        = 2'b01,
-                RIGHT       = 2'b11;
+    parameter   STRAIGHT    = 3'b000,
+                LEFT_SMALL  = 3'b001,
+                LEFT_BIG    = 3'b011,
+                RIGHT_SMALL = 3'b101,
+                RIGHT_BIG   = 3'b111;
 
     // pulse width of each direction
-    parameter   W_STRAIGHT  = 1450, // 0 deg
-                W_LEFT      = 1950, // -45 deg
-                W_RIGHT     = 950; // 54 deg
+    parameter   W_STRAIGHT      = 1450, // 0 deg
+                W_LEFT_SMALL    = 1750, // -27 deg
+                W_LEFT_BIG      = 1950, // -45 deg
+                W_RIGHT_SMALL   = 1150, // 27 deg
+                W_RIGHT_BIG     = 950; // 54 deg
 
     // 5ms period counter
     reg [12:0] cnt;
@@ -39,10 +43,14 @@ module Servo (
         case (direction)
             STRAIGHT:
                 width <= W_STRAIGHT;
-            LEFT:
-                width <= W_LEFT;
-            RIGHT:
-                width <= W_RIGHT;
+            LEFT_SMALL:
+                width <= W_LEFT_SMALL;
+            LEFT_BIG:
+                width <= W_LEFT_BIG;
+            RIGHT_SMALL:
+                width <= W_RIGHT_SMALL;
+            RIGHT_BIG:
+                width <= W_RIGHT_BIG;
             default:
                 width <= W_STRAIGHT;
         endcase
