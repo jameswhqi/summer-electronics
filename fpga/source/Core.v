@@ -15,8 +15,7 @@ module Core (
     // u-turn finished
     input uturn_finished,
 
-    input brake_finished,
-    input reverse_finished,
+    input brake_finished, reverse_finished, fbrake_finished,
     // feedback from Buzzer
     // error buzzing finished
     input buzz_finished,
@@ -25,7 +24,7 @@ module Core (
     // enable uturn in Trackuturn
     output reg en_uturn,
 
-    output reg en_brake, en_reverse,
+    output reg en_brake, en_reverse, en_fbrake,
     // display state code to Ssd
     // 0 ready          1/2/3 sending red/green/blue    4/5/6 red/green/blue arrived
     // 7 end of track   8 u-turning                     9 returning
@@ -39,17 +38,18 @@ module Core (
 );
 
     // fsm states
-    parameter   READY   = 8'b00000001,
-                NOCOLOR = 8'b00000010,
-                SEND    = 8'b00000100,
-                MATCH   = 8'b00001000,
-                UTURN   = 8'b00010000,
-                RETURN  = 8'b00100000,
-                EOT     = 8'b01000000,
-                REVERSE = 8'b10000000;
+    parameter   READY   = 9'b000000001,
+                NOCOLOR = 9'b000000010,
+                SEND    = 9'b000000100,
+                MATCH   = 9'b000001000,
+                UTURN   = 9'b000010000,
+                RETURN  = 9'b000100000,
+                EOT     = 9'b001000000,
+                REVERSE = 9'b010000000,
+                EOR     = 9'b100000000;
 
     // current state, next state
-    reg [7:0] cstate, nstate;
+    reg [8:0] cstate, nstate;
 
     reg [1:0] object_color_detected;
     // determines what to do after a u-turn
@@ -100,19 +100,24 @@ module Core (
                     nstate = UTURN;
             RETURN:
                 if (end_of_track)
-                    nstate = UTURN;
+                    nstate = EOT;
                 else
                     nstate = RETURN;
             EOT:
-                if (buzz_finished && brake_finished)
+                if ((buzz_finished || returning) && brake_finished)
                     nstate = UTURN;
                 else
                     nstate = EOT;
             REVERSE:
                 if (reverse_finished)
-                    nstate = READY;
+                    nstate = EOR;
                 else
                     nstate = REVERSE;
+            EOR:
+                if (fbrake_finished)
+                    nstate = READY;
+                else
+                    nstate = EOR;
             default:
                 nstate = READY;
         endcase
@@ -125,6 +130,7 @@ module Core (
             en_uturn <= 0;
             en_brake <= 0;
             en_reverse <= 0;
+            en_fbrake <= 0;
             ssd_state <= 0;
             en_buzz <= 0;
             en_object <= 1;
@@ -138,6 +144,7 @@ module Core (
                     en_uturn <= 0;
                     en_brake <= 0;
                     en_reverse <= 0;
+                    en_fbrake <= 0;
                     ssd_state <= 0;
                     en_buzz <= 0;
                     en_object <= 1;
@@ -186,11 +193,17 @@ module Core (
                     ssd_state <= 7;
                     en_tracking <= 0;
                     en_brake <= 1;
-                    en_buzz <= 1;
+                    if (!returning)
+                        en_buzz <= 1;
                     en_station <= 0;
                 end
                 REVERSE: begin
                     en_reverse <= 1;
+                    en_uturn <= 0;
+                end
+                EOR: begin
+                    en_reverse <= 0;
+                    en_fbrake <= 1;
                 end
             endcase
 

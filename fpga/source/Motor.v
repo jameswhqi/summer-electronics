@@ -20,8 +20,8 @@ module Motor (
     parameter   PERIOD  = 2273; // 440Hz
 
     // pulse width of different speed
-    parameter   NORMAL  = 100,
-                BRAKE   = 50;
+    parameter   NORMAL  = 115,
+                BRAKE   = 200;
 
     // counter
     reg [11:0] cnt;

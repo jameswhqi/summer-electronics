@@ -7,7 +7,7 @@ module Trackuturn (
     // binary signals of 4 infrared sensors
     input [3:0] ir,
     // enable signal from Core
-    input en_tracking, en_uturn, en_brake, en_reverse,
+    input en_tracking, en_uturn, en_brake, en_reverse, en_fbrake,
     // front wheel direction to Servo
     // 000 straight  001 left small  011 left big  101 right small  111 right big
     output reg [1:0] front_wheel,
@@ -19,19 +19,20 @@ module Trackuturn (
     // u-turn finished to Core
     output reg uturn_finished,
 
-    output reg brake_finished, reverse_finished
+    output reg brake_finished, reverse_finished, fbrake_finished
 );
 
     // fsm states
-    parameter   STOP        = 6'b000001,
-                TRACK       = 6'b000010, // tracking
-                BRAKE       = 6'b000100,
-                FORWARD     = 6'b001000, // going forward during u-turn
-                BACKWARD    = 6'b010000, // going backward during u-turn
-                REVERSE     = 6'b100000;
+    parameter   STOP        = 7'b0000001,
+                TRACK       = 7'b0000010, // tracking
+                BRAKE       = 7'b0000100,
+                FORWARD     = 7'b0001000, // going forward during u-turn
+                BACKWARD    = 7'b0010000, // going backward during u-turn
+                REVERSE     = 7'b0100000,
+                FBRAKE      = 7'b1000000;
 
     // current state, next state
-    reg [5:0] cstate, nstate;
+    reg [6:0] cstate, nstate;
 
     // interpretation of signal from infrared sensors
     parameter WHITE = 1'b0, BLACK = 1'b1;
@@ -58,10 +59,12 @@ module Trackuturn (
     // reg [3:0] delay;
     reg delayed;
 
-    parameter BRAKE_TIME = 1000000; // 1s
-    reg [19:0] brake_cnt;
+    parameter BRAKE_TIME = 500000; // 0.5s
+    reg [18:0] brake_cnt;
 
-    reg double_white, initial_touch;
+    reg double_white;
+
+    reg [3:0] turn_cnt;
 
     // change state
     always @(posedge clkus or negedge rst)
@@ -77,11 +80,13 @@ module Trackuturn (
                 if (en_tracking)
                     nstate = TRACK;
                 else if (en_uturn && !uturn_finished)
-                    nstate = FORWARD;
+                    nstate = BACKWARD;
                 else if (en_brake && !brake_finished)
                     nstate = BRAKE;
                 else if (en_reverse && !reverse_finished)
                     nstate = REVERSE;
+                else if (en_fbrake && !fbrake_finished)
+                    nstate = FBRAKE;
                 else
                     nstate = STOP;
             TRACK:
@@ -97,14 +102,14 @@ module Trackuturn (
             FORWARD:
                 if (double_white && (ir[2] == BLACK || ir[1] == BLACK))
                     nstate = BACKWARD;
-                else if (initial_touch && ir == {WHITE, WHITE, WHITE, WHITE})
+                else if (turn_cnt >= 2 && ir == {WHITE, WHITE, WHITE, WHITE})
                     nstate = STOP;
                 else
                     nstate = FORWARD;
             BACKWARD:
                 if (double_white && (ir[2] == BLACK || ir[1] == BLACK))
                     nstate = FORWARD;
-                else if (initial_touch && ir == {WHITE, WHITE, WHITE, WHITE})
+                else if (turn_cnt >= 2 && (ir == {WHITE, WHITE, WHITE, WHITE} || ir == {BLACK, BLACK, WHITE, WHITE} || ir == {WHITE, WHITE, BLACK, BLACK}))
                     nstate = STOP;
                 else
                     nstate = BACKWARD;
@@ -113,6 +118,11 @@ module Trackuturn (
                     nstate = STOP;
                 else
                     nstate = REVERSE;
+            FBRAKE:
+                if (brake_cnt == 1)
+                    nstate = STOP;
+                else
+                    nstate = FBRAKE;
             default:
                 nstate = STOP;
         endcase
@@ -130,8 +140,8 @@ module Trackuturn (
             delay <= 0;
             delayed <= 0;
             brake_cnt <= 0;
+            turn_cnt <= 0;
             double_white <= 0;
-            initial_touch <= 0;
         end
         else
             case (nstate)
@@ -151,11 +161,15 @@ module Trackuturn (
                         reverse_finished <= 1;
                     else if (!en_reverse)
                         reverse_finished <= 0;
+                    if (cstate == FBRAKE)
+                        fbrake_finished <= 1;
+                    else if (!en_fbrake)
+                        fbrake_finished <= 0;
                     delay <= 0;
                     delayed <= 0;
                     brake_cnt <= 0;
+                    turn_cnt <= 0;
                     double_white <= 0;
-                    initial_touch <= 0;
                 end
                 TRACK: begin
                     if (ir[3] == BLACK && ir[0] == WHITE)
@@ -170,6 +184,9 @@ module Trackuturn (
                         motor <= MOTOR_FOR;
                     if (ir[3] == BLACK && ir[0] == BLACK)
                         end_of_track <= 1;
+                    uturn_finished <= 0;
+                    brake_finished <= 0;
+                    reverse_finished <= 0;
                 end
                 BRAKE: begin
                     front_wheel <= STRAIGHT;
@@ -181,7 +198,7 @@ module Trackuturn (
                 end
                 FORWARD: begin
                     if (delay >= TURN_DELAY)
-                        if (initial_touch && ir[3] == WHITE && ir[0] == WHITE)
+                        if (turn_cnt >= 2 && ir[3] == WHITE && ir[0] == WHITE)
                             front_wheel <= STRAIGHT;
                         else
                             front_wheel <= LEFT;
@@ -189,8 +206,10 @@ module Trackuturn (
                         motor <= MOTOR_FOR;
                     else if (!delayed)
                         motor <= MOTOR_STOP;
-                    if (cstate == BACKWARD)
+                    if (cstate == BACKWARD) begin
                         double_white <= 0;
+                        turn_cnt <= turn_cnt + 1;
+                    end
                     if (ir[2:1] == {WHITE, WHITE})
                         double_white <= 1;
                     if (delayed)
@@ -201,8 +220,6 @@ module Trackuturn (
                         delayed <= 0;
                     else if (delay >= DRIVE_DELAY)
                         delayed <= 1;
-                    if (ir[3] == BLACK)
-                        initial_touch <= 1;
                 end
                 BACKWARD: begin
                     if (delay >= TURN_DELAY)
@@ -211,8 +228,10 @@ module Trackuturn (
                         motor <= MOTOR_BACK;
                     else if (!delayed)
                         motor <= MOTOR_STOP;
-                    if (cstate == FORWARD)
+                    if (cstate == FORWARD) begin
                         double_white <= 0;
+                        turn_cnt <= turn_cnt + 1;
+                    end
                     if (ir[2:1] == {WHITE, WHITE})
                         double_white <= 1;
                     if (delayed)
@@ -227,6 +246,14 @@ module Trackuturn (
                 REVERSE: begin
                     front_wheel <= STRAIGHT;
                     motor <= MOTOR_BACK;
+                end
+                FBRAKE: begin
+                    front_wheel <= STRAIGHT;
+                    motor <= MOTOR_FOR;
+                    if (brake_cnt == 0)
+                        brake_cnt <= BRAKE_TIME;
+                    else
+                        brake_cnt <= brake_cnt - 1;
                 end
             endcase
 endmodule

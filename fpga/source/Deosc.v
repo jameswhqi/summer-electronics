@@ -12,8 +12,8 @@ module Deosc (
     reg prev;
 
     // wait counter
-    parameter TIME = 1000; // 1ms
-    reg [9:0] cnt;
+    parameter BITS = 13, TIME = 5000; // 5ms
+    reg [BITS - 1:0] cnt;
 
     always @(posedge clkus) begin
         if (in != prev && cnt == 0)
