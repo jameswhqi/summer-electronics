@@ -93,8 +93,8 @@ module Color (
                     else
                         object_color <= 0;
 
-                    if (stn_cnt_r >= 20 && stn_cnt_r < 40 && stn_cnt_r - stn_cnt_r[9:2] > stn_cnt_b && stn_cnt_r - stn_cnt_r[9:1] > stn_cnt_g && stn_cnt_b > stn_cnt_g
-                        || stn_cnt_r >= 40 && stn_cnt_r - stn_cnt_r[9:2] > stn_cnt_b && stn_cnt_r - stn_cnt_r[9:1] > stn_cnt_g && stn_cnt_b > stn_cnt_g)
+                    if (stn_cnt_r >= 20 && stn_cnt_r < 40 && stn_cnt_r[9:1] > stn_cnt_b && stn_cnt_r[9:1] - stn_cnt_r[9:3] > stn_cnt_g && stn_cnt_b > stn_cnt_g
+                        || stn_cnt_r >= 40 && stn_cnt_r - stn_cnt_r[9:1] > stn_cnt_b && stn_cnt_r - stn_cnt_r[9:1] - stn_cnt_r[9:3] > stn_cnt_g && stn_cnt_b > stn_cnt_g)
                         station_color <= 1;
                     else if (stn_cnt_g >= 16 && stn_cnt_g - stn_cnt_g[9:2] - stn_cnt_g[9:3] > stn_cnt_r && stn_cnt_g - stn_cnt_g[9:2]- - stn_cnt_g[9:3] > stn_cnt_b)
                         station_color <= 2;

@@ -102,7 +102,7 @@ module Trackuturn (
             FORWARD:
                 if (double_white && (ir[2] == BLACK || ir[1] == BLACK))
                     nstate = BACKWARD;
-                else if (turn_cnt >= 2 && ir == {WHITE, WHITE, WHITE, WHITE})
+                else if (turn_cnt >= 2 && (ir == {WHITE, WHITE, WHITE, WHITE} || ir == {BLACK, BLACK, WHITE, WHITE}))
                     nstate = STOP;
                 else
                     nstate = FORWARD;
@@ -197,7 +197,7 @@ module Trackuturn (
                         brake_cnt <= brake_cnt - 1;
                 end
                 FORWARD: begin
-                    if (delay >= TURN_DELAY)
+                    if (delay >= TURN_DELAY || delayed && cstate != BACKWARD)
                         if (turn_cnt >= 2 && ir[3] == WHITE && ir[0] == WHITE)
                             front_wheel <= STRAIGHT;
                         else
